@@ -1,6 +1,4 @@
-var bencode = require('./lib/bencode');
-
-console.log(bencode)
+var bencode = require('util/bencode');
 
 exports['test bencode integer'] = function(test, assert) {
   assert.equal(bencode.bencode_integer(4), 'i4e');
