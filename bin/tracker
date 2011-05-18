@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+var path = require('path');
+
+require.paths.unshift(path.join(__dirname, '../lib'));
+
+var tracker = require('services/tracker');
+
+tracker.run();
