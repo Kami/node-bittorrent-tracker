@@ -1,0 +1,32 @@
+{
+  "name": "bittorrent-tracker",
+  "description": "BitTorrent tracker written in Node.js.",
+  "version": "0.1.0",
+  "author": "Tomaz Muraus <tomaz+npm@tomaz.me> http://www.tomaz.me",
+  "keywords": [ "torrent", "bittorrent", "tracker" ],
+  "homepage": "https://github.com/Kami/node-bittorrent-tracker",
+  "license": "BSD",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Kami/node-bittorrent-tracker.git"
+  },
+  "modules": {
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "express": ">= 2.3.4",
+    "sprintf": ">= 0.1.1"
+  },
+  "devDependencies": {
+    "whiskey": "= 0.3.2",
+  },
+  "engines": {
+    "node": ">= 0.4.0"
+  },
+  "main": "./index"
+}
