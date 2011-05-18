@@ -1,5 +1,20 @@
 var bencode = require('util/bencode');
 
+exports['test bencode invalid type'] = function(test, assert) {
+  var e = 0;
+
+  try {
+    bencode.bencode(true);
+  }
+  catch (err) {
+    assert.match(err.message, /invalid type/i);
+    e++;
+  }
+
+  assert.equal(e, 1);
+  test.finish();
+};
+
 exports['test bencode integer'] = function(test, assert) {
   assert.equal(bencode.bencode_integer(4), 'i4e');
   assert.equal(bencode.bencode_integer(-5), 'i-5e');
@@ -17,13 +32,13 @@ exports['test bencode string'] = function(test, assert) {
 };
 
 exports['test bencode list'] = function(test, assert) {
-  assert.equal(bencode.bencode_list(['spam', 42]), 'l4:spami42ee');
+  assert.equal(bencode.bencode(['spam', 42]), 'l4:spami42ee');
 
   test.finish();
 };
 
 exports['test bencode dictionary'] = function(test, assert) {
-  assert.equal(bencode.bencode_dictionary({'foo': 42, 'bar': 'spam'}), 'd3:bar4:spam3:fooi42ee');
+  assert.equal(bencode.bencode({'foo': 42, 'bar': 'spam'}), 'd3:bar4:spam3:fooi42ee');
 
   test.finish();
 };
@@ -126,6 +141,12 @@ exports['test bdecode list doesnt start with l'] = function(test, assert) {
 exports['test bdecode empty list'] = function(test, assert) {
   assert.deepEqual(bencode.bdecode_list('l1e'), [[], 3]);
   assert.deepEqual(bencode.bdecode_list('le:e'), [[], 4]);
+  test.finish();
+};
+
+exports['test bdecode empty dictionary'] = function(test, assert) {
+  assert.deepEqual(bencode.bdecode_dictionary('d1e'), [{}, 3]);
+  assert.deepEqual(bencode.bdecode_dictionary('de:e'), [{}, 4]);
   test.finish();
 };
 
