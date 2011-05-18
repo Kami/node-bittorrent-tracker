@@ -37,6 +37,11 @@ exports['test bdecode integer'] = function(test, assert) {
   test.finish();
 };
 
+exports['test bdecode empty string'] = function(test, assert) {
+  assert.equal(bencode.bdecode(''), '');
+  test.finish();
+};
+
 exports['test bdecode string'] = function(test, assert) {
   var e = 0;
 
