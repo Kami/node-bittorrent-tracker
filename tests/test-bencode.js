@@ -42,6 +42,32 @@ exports['test bdecode empty string'] = function(test, assert) {
   test.finish();
 };
 
+exports['test bdecode non-string string'] = function(test, assert) {
+  var e = 0;
+  var i, value, valuesLen;
+  var values = [
+    {'a': 'b'},
+    [1, 2],
+    new Error()
+  ];
+
+  for (i = 0, valuesLen = values.length; i < valuesLen; i++) {
+    value = values[i];
+
+    try {
+      bencode.bdecode(value);
+    }
+    catch (err) {
+      assert.match(err.message, /first argument must be a string/i);
+      e++;
+    }
+  }
+
+  assert.equal(e, valuesLen);
+  test.finish();
+};
+
+
 exports['test bdecode string'] = function(test, assert) {
   var e = 0;
 
