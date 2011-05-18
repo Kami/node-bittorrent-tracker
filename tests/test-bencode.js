@@ -42,6 +42,21 @@ exports['test bdecode empty string'] = function(test, assert) {
   test.finish();
 };
 
+exports['test bdecode dictionary doesnt start with d'] = function(test, assert) {
+  var e = 0;
+
+  try {
+    bencode.bdecode_dictionary('x3:bar4');
+  }
+  catch (err) {
+    assert.match(err.message, /bencoded dictionary objects must start with/i);
+    e++;
+  }
+
+  assert.equal(e, 1);
+  test.finish();
+};
+
 exports['test bdecode non-string string'] = function(test, assert) {
   var e = 0;
   var i, value, valuesLen;
@@ -90,6 +105,27 @@ exports['test bdecode string'] = function(test, assert) {
 exports['test bdecode list'] = function(test, assert) {
   assert.deepEqual(bencode.bdecode('l4:spami42ee')[0], ['spam', 42]);
 
+  test.finish();
+};
+
+exports['test bdecode list doesnt start with l'] = function(test, assert) {
+  var e = 0;
+
+  try {
+    bencode.bdecode_list('m4:spami42ee');
+  }
+  catch (err) {
+    assert.match(err.message, /bencoded list objects must start with/i);
+    e++;
+  }
+
+  assert.equal(e, 1);
+  test.finish();
+};
+
+exports['test bdecode empty list'] = function(test, assert) {
+  assert.deepEqual(bencode.bdecode_list('l1e'), [[], 3]);
+  assert.deepEqual(bencode.bdecode_list('le:e'), [[], 4]);
   test.finish();
 };
 
