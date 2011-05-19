@@ -4,10 +4,10 @@ var path = require('path');
 
 require.paths.unshift(path.join(__dirname, '../lib'));
 
-var tracker = require('services/tracker');
+var serviceHandler = require('services/index').ServiceHandler;
 
-tracker.run();
+serviceHandler.startServices();
 
 process.on('SIGINT', function() {
-  tracker.stop();
+  serviceHandler.stopServices(false);
 });
