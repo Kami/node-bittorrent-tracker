@@ -44,11 +44,22 @@ exports['test bencode dictionary'] = function(test, assert) {
 };
 
 exports['test bdecode integer'] = function(test, assert) {
+  var e = 0;
+
   assert.equal(bencode.bdecode('i4e')[0], 4);
   assert.equal(bencode.bdecode('i0e')[0], 0);
   assert.equal(bencode.bdecode('i12345e')[0], 12345);
-  assert.equal(bencode.bdecode('i-0e'), null);
+  assert.equal(bencode.bdecode('i-42e')[0], -42);
 
+  try {
+    bencode.bdecode('i-0e');
+  }
+  catch (err) {
+    e++;
+    assert.match(err.message, /negative zero is not permitted/i);
+  }
+
+  assert.equal(e, 1, 'Exceptions thrown');
   test.finish();
 };
 
