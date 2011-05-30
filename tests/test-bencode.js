@@ -182,7 +182,8 @@ exports['test bdecode empty dictionary'] = function(test, assert) {
     }
   });
 
-  assert.deepEqual(bencode.bdecode('de:e'), []);
+  assert.deepEqual(bencode.bdecode('de:e'), {});
+  assert.deepEqual(bencode.bdecode('de'), {});
 
   assert.equal(e, values.length, 'Exceptions thrown');
   test.finish();
