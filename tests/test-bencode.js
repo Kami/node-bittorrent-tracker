@@ -52,7 +52,7 @@ exports['test bdecode integer'] = function(test, assert) {
   assert.equal(bencode.bdecode('i-42e'), -42);
 
   try {
-    bencode.bdecode('i-0e');
+    console.log(bencode.bdecode('i-0e'));
   }
   catch (err) {
     e++;
@@ -72,10 +72,10 @@ exports['test bdecode dictionary doesnt start with d'] = function(test, assert) 
   var e = 0;
 
   try {
-    bencode.bdecode_dictionary('x3:bar4');
+    bencode.bdecode('x3:bar4');
   }
   catch (err) {
-    assert.match(err.message, /bencoded dictionary objects must start with/i);
+    assert.match(err.message, /invalid bencoded string/i);
     e++;
   }
 
@@ -138,11 +138,11 @@ exports['test bdecode list doesnt start with l'] = function(test, assert) {
   var e = 0;
 
   try {
-    bencode.bdecode_list('m4:spami42ee');
+    bencode.bdecode('m4:spami42ee');
   }
   catch (err) {
-    assert.match(err.message, /bencoded list objects must start with/i);
     e++;
+    assert.match(err.message, /invalid bencoded string/i);
   }
 
   assert.equal(e, 1, 'Exceptions thrown');
@@ -155,7 +155,7 @@ exports['test bdecode empty list'] = function(test, assert) {
 
   values.forEach(function(value) {
     try {
-      bencode.bdecode_list(value);
+      bencode.bdecode(value);
     }
     catch (err) {
       e++;
@@ -175,7 +175,7 @@ exports['test bdecode empty dictionary'] = function(test, assert) {
 
   values.forEach(function(value) {
     try {
-      bencode.bdecode_dictionary(value);
+      bencode.bdecode(value);
     }
     catch (err) {
       e++;
