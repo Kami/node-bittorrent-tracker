@@ -145,19 +145,46 @@ exports['test bdecode list doesnt start with l'] = function(test, assert) {
     e++;
   }
 
-  assert.equal(e, 1);
+  assert.equal(e, 1, 'Exceptions thrown');
   test.finish();
 };
 
 exports['test bdecode empty list'] = function(test, assert) {
-  assert.deepEqual(bencode.bdecode_list('l1e'), [[], 3]);
-  assert.deepEqual(bencode.bdecode_list('le:e'), [[], 4]);
+  var e = 0;
+  var values = ['l1e'];
+
+  values.forEach(function(value) {
+    try {
+      bencode.bdecode_list(value);
+    }
+    catch (err) {
+      e++;
+      assert.match(err.message, /invalid bencoded string/i);
+    }
+  });
+
+  assert.deepEqual(bencode.bdecode('le:e'), []);
+
+  assert.equal(e, values.length, 'Exceptions thrown');
   test.finish();
 };
 
 exports['test bdecode empty dictionary'] = function(test, assert) {
-  assert.deepEqual(bencode.bdecode_dictionary('d1e'), [{}, 3]);
-  assert.deepEqual(bencode.bdecode_dictionary('de:e'), [{}, 4]);
+  var e = 0;
+  var values = ['d1e'];
+
+  values.forEach(function(value) {
+    try {
+      bencode.bdecode_dictionary(value);
+    }
+    catch (err) {
+      e++;
+    }
+  });
+
+  assert.deepEqual(bencode.bdecode('de:e'), []);
+
+  assert.equal(e, values.length, 'Exceptions thrown');
   test.finish();
 };
 
