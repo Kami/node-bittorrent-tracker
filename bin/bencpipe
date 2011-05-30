@@ -1,0 +1,23 @@
+#!/usr/bin/env node
+// Usage, e.g.: echo "d8:intervali120e5:peersld2:ip9:127.0.0.14:porti5555eeee" | bencpipe
+
+var path = require('path');
+var util = require('util');
+
+require.paths.unshift(path.join(__dirname, '../lib'));
+
+var bencode = require('util/bencode');
+
+var stdin = process.openStdin();
+var buffer = '';
+
+stdin.on('data', function(chunk) {
+  buffer += chunk;
+});
+
+process.on('exit', function() {
+  if (buffer) {
+    var decoded = bencode.bdecode(buffer);
+    console.log(util.inspect(decoded, false, 10, true));
+  }
+})
