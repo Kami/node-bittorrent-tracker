@@ -19,7 +19,7 @@
     "test": "make test"
   },
   "dependencies": {
-    "express": ">= 2.3.4",
+    "express": ">= 2.3.10",
     "async": ">= "0.1.9",
     "sprintf": ">= 0.1.1",
     "logmagic": ">= 0.1.1"
