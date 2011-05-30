@@ -46,10 +46,10 @@ exports['test bencode dictionary'] = function(test, assert) {
 exports['test bdecode integer'] = function(test, assert) {
   var e = 0;
 
-  assert.equal(bencode.bdecode('i4e')[0], 4);
-  assert.equal(bencode.bdecode('i0e')[0], 0);
-  assert.equal(bencode.bdecode('i12345e')[0], 12345);
-  assert.equal(bencode.bdecode('i-42e')[0], -42);
+  assert.equal(bencode.bdecode('i4e'), 4);
+  assert.equal(bencode.bdecode('i0e'), 0);
+  assert.equal(bencode.bdecode('i12345e'), 12345);
+  assert.equal(bencode.bdecode('i-42e'), -42);
 
   try {
     bencode.bdecode('i-0e');
@@ -112,8 +112,8 @@ exports['test bdecode non-string string'] = function(test, assert) {
 exports['test bdecode string'] = function(test, assert) {
   var e = 0;
 
-  assert.equal(bencode.bdecode('4:test')[0], 'test');
-  assert.equal(bencode.bdecode('3:foo')[0], 'foo');
+  assert.equal(bencode.bdecode('4:test'), 'test');
+  assert.equal(bencode.bdecode('3:foo'), 'foo');
 
   try {
     assert.equal(bencode.bdecode('5:bar'), 'bar');
@@ -129,7 +129,7 @@ exports['test bdecode string'] = function(test, assert) {
 };
 
 exports['test bdecode list'] = function(test, assert) {
-  assert.deepEqual(bencode.bdecode('l4:spami42ee')[0], ['spam', 42]);
+  assert.deepEqual(bencode.bdecode('l4:spami42ee'), ['spam', 42]);
 
   test.finish();
 };
@@ -162,7 +162,7 @@ exports['test bdecode empty dictionary'] = function(test, assert) {
 };
 
 exports['test bdecode object'] = function(test, assert) {
- assert.deepEqual(bencode.bdecode('d3:bar4:spam3:fooi42ee')[0], {'foo': 42, 'bar': 'spam'});
+ assert.deepEqual(bencode.bdecode('d3:bar4:spam3:fooi42ee'), {'foo': 42, 'bar': 'spam'});
 
   test.finish();
 };
