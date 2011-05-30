@@ -20,4 +20,9 @@ process.on('exit', function() {
     var decoded = bencode.bdecode(buffer);
     console.log(util.inspect(decoded, false, 10, true));
   }
-})
+});
+
+process.on('uncaughtException', function(err) {
+  console.log(err.message);
+  process.reallyExit(1);
+});
