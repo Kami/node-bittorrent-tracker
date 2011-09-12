@@ -20,12 +20,12 @@
   },
   "dependencies": {
     "express": ">= 2.3.10",
-    "async": ">= "0.1.9",
+    "async": ">= 0.1.9",
     "sprintf": ">= 0.1.1",
     "logmagic": ">= 0.1.1"
   },
   "devDependencies": {
-    "whiskey": "= 0.3.2",
+    "whiskey": "= 0.3.2"
   },
   "engines": {
     "node": ">= 0.4.0"
