@@ -25,7 +25,10 @@
     "logmagic": ">= 0.1.1"
   },
   "devDependencies": {
-    "whiskey": "= 0.3.2"
+    "whiskey": "0.6.9"
+  },
+  "scripts": {
+    "test": "./scripts/tests.sh"
   },
   "engines": {
     "node": ">= 0.4.0"
